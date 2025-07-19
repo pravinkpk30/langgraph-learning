@@ -1,6 +1,6 @@
 # LangGraph Learning
 
-This project demonstrates the use of LangGraph to create and visualize workflow graphs. It includes four examples that show different aspects of building and executing graphs with LangGraph.
+This project demonstrates the use of LangGraph to create and visualize workflow graphs. It includes six examples that show different aspects of building and executing graphs with LangGraph.
 
 ## Prerequisites
 
@@ -36,6 +36,8 @@ This project demonstrates the use of LangGraph to create and visualize workflow 
 - `2_graph_with_condition.py`: Example with conditional branching
 - `3_chatbot.py`: Interactive chatbot using LangGraph and a language model
 - `4_tool_call.py`: Example of tool calling with LangGraph
+- `5_tool_call_agent.py`: Advanced tool calling with agentic behavior
+- `6_memory.py`: Multi-session memory and checkpointing example
 - `.gitignore`: Git ignore file for Python projects
 - `sample.env`: Example environment variables file
 
@@ -141,6 +143,58 @@ What is the price of RIL?
 ```
 
 **Note**: This example uses a mock implementation of stock prices. In a production environment, you would connect to a real financial API.
+
+### 5. Advanced Tool Calling with Agent (`5_tool_call_agent.py`)
+
+This example extends the basic tool calling with agentic behavior, allowing for more complex interactions and multi-step tool usage.
+
+**Key Features**:
+- Maintains conversation context across multiple interactions
+- Handles multi-step tool usage in a single query
+- Demonstrates agentic behavior with tool calling
+- Visualizes the agent's decision-making process
+
+**To run**:
+```bash
+uv run 5_tool_call_agent.py
+```
+
+**Example Queries**:
+```
+I want to buy 20 AMZN stocks using current price. Then 15 MSFT. What will be the total cost?
+What's the current price of AAPL and MSFT combined?
+```
+
+### 6. Multi-session Memory and Checkpointing (`6_memory.py`)
+
+This example demonstrates how to implement persistent memory and checkpointing in LangGraph, enabling multi-session conversations and state management.
+
+**Key Features**:
+- Uses `MemorySaver` for persistent conversation state
+- Implements separate conversation threads with their own memory
+- Demonstrates state persistence across multiple interactions
+- Shows how to maintain context in complex workflows
+
+**To run**:
+```bash
+uv run 6_memory.py
+```
+
+**Key Concepts**:
+- **Checkpointing**: Saves the state of the conversation at specific points
+- **Thread Management**: Maintains separate conversation threads with independent states
+- **Context Persistence**: Remembers previous interactions within the same thread
+
+**Example Use Case**:
+```python
+# First thread
+config1 = {'configurable': {'thread_id': '1'}}
+state = graph.invoke({"messages": [{"role": "user", "content": "What's the price of AAPL?"}]}, config=config1)
+
+# Second thread (independent of the first)
+config2 = {'configurable': {'thread_id': '2'}}
+state = graph.invoke({"messages": [{"role": "user", "content": "What's the price of MSFT?"}]}, config=config2)
+```
 
 ## Understanding the Code
 
