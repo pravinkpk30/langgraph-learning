@@ -39,6 +39,7 @@ This project demonstrates the use of LangGraph to create and visualize workflow 
 - `5_tool_call_agent.py`: Advanced tool calling with agentic behavior
 - `6_memory.py`: Multi-session memory and checkpointing example
 - `7_langsmith_tracing.py`: LangSmith integration for monitoring and tracing  
+- `8_HITL.py`: Human-in-the-Loop (HITL) intervention example
 - `.gitignore`: Git ignore file for Python projects
 - `sample.env`: Example environment variables file
 
@@ -223,6 +224,22 @@ uv add langsmith
 
 # Run the example with tracing enabled
 uv run 7_langsmith_tracing.py
+```
+
+### 8. Human-in-the-Loop (HITL) Intervention ([8_HITL.py](cci:7://file:///Users/praveenkumar/Desktop/Studies/langgraph-learning/8_HITL.py:0:0-0:0))
+
+This example demonstrates how to implement Human-in-the-Loop (HITL) functionality in LangGraph, allowing for manual approval of critical actions.
+
+**Key Features**:
+- Implements interruptible workflows that pause for human approval
+- Maintains conversation state across interruptions
+- Demonstrates conditional execution based on human input
+- Visualizes the workflow with graph visualization
+
+**To run**:
+```bash
+uv run 8_HITL.py  # Run the example with tracing enabled
+```
 
 ## Understanding the Code
 
