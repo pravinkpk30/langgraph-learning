@@ -38,6 +38,7 @@ This project demonstrates the use of LangGraph to create and visualize workflow 
 - `4_tool_call.py`: Example of tool calling with LangGraph
 - `5_tool_call_agent.py`: Advanced tool calling with agentic behavior
 - `6_memory.py`: Multi-session memory and checkpointing example
+- `7_langsmith_tracing.py`: LangSmith integration for monitoring and tracing  
 - `.gitignore`: Git ignore file for Python projects
 - `sample.env`: Example environment variables file
 
@@ -195,6 +196,33 @@ state = graph.invoke({"messages": [{"role": "user", "content": "What's the price
 config2 = {'configurable': {'thread_id': '2'}}
 state = graph.invoke({"messages": [{"role": "user", "content": "What's the price of MSFT?"}]}, config=config2)
 ```
+
+### 7. LangSmith Integration and Tracing ([7_langsmith_tracing.py](cci:7://file:///Users/praveenkumar/Desktop/Studies/langgraph-learning/7_langsmith_tracing.py:0:0-0:0))
+
+This example demonstrates how to integrate LangSmith for monitoring, tracing, and debugging your LangGraph applications.
+
+**Key Features**:
+- Tracks and visualizes the execution flow of your LangGraph applications
+- Records inputs, outputs, and intermediate steps for debugging
+- Provides performance metrics and latency tracking
+- Enables collaboration and sharing of traces with team members
+
+**Prerequisites**:
+1. Sign up for LangSmith at [https://smith.langchain.com](https://smith.langchain.com)
+2. Get your API key from the LangSmith settings
+3. Update the [.env](cci:7://file:///Users/praveenkumar/Desktop/Studies/langgraph-learning/sample.env:0:0-0:0) file with your LangSmith credentials (use [sample.env](cci:7://file:///Users/praveenkumar/Desktop/Studies/langgraph-learning/sample.env:0:0-0:0) as a template)
+
+**To run**:
+```bash
+# First, update your .env file with LangSmith credentials
+cp sample.env .env
+# Edit .env and add your LangSmith API key and project details
+
+# Install additional dependencies
+uv add langsmith
+
+# Run the example with tracing enabled
+uv run 7_langsmith_tracing.py
 
 ## Understanding the Code
 
