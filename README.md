@@ -1,6 +1,6 @@
 # LangGraph Learning
 
-This project demonstrates the use of LangGraph to create and visualize workflow graphs. It includes two examples that show different aspects of building and executing graphs with LangGraph.
+This project demonstrates the use of LangGraph to create and visualize workflow graphs. It includes three examples that show different aspects of building and executing graphs with LangGraph.
 
 ## Prerequisites
 
@@ -34,7 +34,9 @@ This project demonstrates the use of LangGraph to create and visualize workflow 
 
 - `1_simple_graph.py`: Basic example of a linear workflow graph
 - `2_graph_with_condition.py`: Example with conditional branching
+- `3_chatbot.py`: Interactive chatbot using LangGraph and a language model
 - `.gitignore`: Git ignore file for Python projects
+- `sample.env`: Example environment variables file
 
 ## Examples
 
@@ -70,6 +72,40 @@ uv run 2_graph_with_condition.py
 **Output**:
 - Saves a visualization of the graph as `2_graph_with_condition.png`
 - Prints the calculation results to the console with the selected currency
+
+### 3. Interactive Chatbot (`3_chatbot.py`)
+
+This example demonstrates how to build an interactive chatbot using LangGraph with a language model (Google's Gemini). It features:
+
+1. Conversation state management with message history
+2. Integration with Google's Gemini model
+3. Interactive command-line interface
+4. Graph visualization of the conversation flow
+
+**Prerequisites**:
+- Set up your Google API key in a `.env` file (use `sample.env` as a template)
+- Install required dependencies (see Installation section)
+
+**To run**:
+```bash
+# First, create a .env file with your Google API key
+cp sample.env .env
+# Then edit .env and replace GOOGLE_API_KEY with your actual API key
+
+# Run the chatbot
+uv run 3_chatbot.py
+```
+
+**Usage**:
+- Type your message and press Enter to chat with the bot
+- Type `quit` or `exit` to end the session
+- The conversation history is maintained throughout the session
+
+**Output**:
+- Saves a visualization of the conversation graph as `3_chatbot.png`
+- Displays responses in an interactive chat interface
+
+**Note**: Make sure to keep your API key secure and never commit it to version control.
 
 ## Understanding the Code
 
