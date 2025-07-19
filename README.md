@@ -1,6 +1,6 @@
 # LangGraph Learning
 
-This project demonstrates the use of LangGraph to create and visualize workflow graphs. It includes three examples that show different aspects of building and executing graphs with LangGraph.
+This project demonstrates the use of LangGraph to create and visualize workflow graphs. It includes four examples that show different aspects of building and executing graphs with LangGraph.
 
 ## Prerequisites
 
@@ -35,6 +35,7 @@ This project demonstrates the use of LangGraph to create and visualize workflow 
 - `1_simple_graph.py`: Basic example of a linear workflow graph
 - `2_graph_with_condition.py`: Example with conditional branching
 - `3_chatbot.py`: Interactive chatbot using LangGraph and a language model
+- `4_tool_call.py`: Example of tool calling with LangGraph
 - `.gitignore`: Git ignore file for Python projects
 - `sample.env`: Example environment variables file
 
@@ -106,6 +107,40 @@ uv run 3_chatbot.py
 - Displays responses in an interactive chat interface
 
 **Note**: Make sure to keep your API key secure and never commit it to version control.
+
+### 4. Tool Calling with LangGraph (`4_tool_call.py`)
+
+This example demonstrates how to integrate custom tools with LangGraph and a language model. It features:
+
+1. Custom tool definition for stock price lookup
+2. Dynamic tool calling based on user input
+3. Conditional graph edges for tool execution
+4. Interactive command-line interface
+
+**Key Features**:
+- Defines a custom `get_stock_price` tool that returns mock stock prices
+- Uses `ToolNode` for handling tool execution
+- Implements conditional edges for dynamic workflow routing
+- Visualizes the tool-calling workflow
+
+**To run**:
+```bash
+uv run 4_tool_call.py
+```
+
+**Usage**:
+- Ask about stock prices using company symbols (e.g., "What is AAPL stock price?")
+- The bot will respond with the current price if the company is in its database
+- Type `quit` or `exit` to end the session
+
+**Example Queries**:
+```
+What is the current price of MSFT?
+I want to buy 20 AMZN stocks
+What is the price of RIL?
+```
+
+**Note**: This example uses a mock implementation of stock prices. In a production environment, you would connect to a real financial API.
 
 ## Understanding the Code
 
