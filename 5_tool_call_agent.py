@@ -17,7 +17,6 @@ class State(TypedDict):
     # (in this case, it appends messages to the list, rather than overwriting them)
     messages: Annotated[list, add_messages]
 
-# Custom tool to get stock price else you can use the external tools like Yahoo finance API to fetch the latest stock price
 @tool
 def get_stock_price(symbol: str) -> float:
     '''Return the current price of a stock given the stock symbol
@@ -39,31 +38,27 @@ def chatbot(state: State):
     return {"messages": [llm_with_tools.invoke(state["messages"])]}
 
 builder = StateGraph(State)
-builder.add_node("chatbot_node", chatbot)
+
+builder.add_node(chatbot)
 builder.add_node("tools", ToolNode(tools))
 
-builder.add_edge(START, "chatbot_node")
-builder.add_conditional_edges("chatbot_node", tools_condition)
-# builder.add_edge("tools", END)
+builder.add_edge(START, "chatbot")
+builder.add_conditional_edges("chatbot", tools_condition)
+builder.add_edge("tools", "chatbot")
 
 graph = builder.compile()
 
 graph_image = graph.get_graph().draw_mermaid_png()
-with open("4_tool_call.png", "wb") as f:
+with open("5_tool_call_agent.png", "wb") as f:
     f.write(graph_image)
-print("Graph visualization saved as '4_tool_call.png'")
+print("Graph visualization saved as '5_tool_call_agent.png'")
 
-state = graph.invoke({"messages": [{"role": "user", "content": "What is the price of AAPL stock right now?"}]})
-print(state["messages"][-1].content) # 100.4
-
-state = graph.invoke({"messages": [{"role": "user", "content": "Who invented theory of relativity? print person name only"}]})
-print(state["messages"][-1].content) # Albert Einstein
-
+# Agentic LLM
 msg = "I want to buy 20 AMZN stocks using current price. Then 15 MSFT. What will be the total cost?"
-
 state = graph.invoke({"messages": [{"role": "user", "content": msg}]})
-print(state["messages"][-1].content) # 200.3 not summing both stock price so that we can call back agent to get the total cost after tool executing. We can go for 5_tool_call_agent.py
+print(state["messages"][-1].content)
 
+# Interactive
 state = None
 while True:
     in_message = input("You: ")
